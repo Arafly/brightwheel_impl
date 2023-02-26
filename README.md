@@ -1,7 +1,5 @@
 ## IAM RBAC Implementation
 
-This is a high-level overview of how to implement a role-based access control (RBAC) system for AWS Identity and Access Management (IAM) that supports multiple development teams with specific areas of product focus. The following steps can be taken. Paying attention to the engineering teams to ensure the prevention of privilege escalation attacks, at the same time considering things like: cost analysis, security, automation, monitoring, and logging. 
-
 Firstly with the identification of the specific AWS tools and technology that each development team requires access to - CloudFront, EKS and Redshift for the Frontend, Backend and Data Engineering Team respectively, we're in the right direction to follow these steps:
 
 The RBAC implementation can be achieved in AWS using the AWS Identity and Access Management (IAM) service. IAM enables you to manage access to AWS services and resources securely. To implement RBAC in this scenario, we will create IAM roles with appropriate permissions and assign those roles to IAM users or groups.
@@ -16,9 +14,9 @@ The following steps can be taken to implement RBAC in AWS using IAM are highligh
 
 1. AWS Organizations is utilized to create a hard isolation between production environment and non-production environments by creating them as separate accounts for each environment (i.e Dev, QA, and Production). This provides adequate workloads isolation or even for applications that have specific security requirements, or the need to meet strict guidelines for compliance such as HIPAA, PCI and also limit the impact of potential security breaches by lowering the risk of exposing production data in non-production environments.
 
-2. An IAM group is created for each engineering team (Frontend Engineering, Backend Engineering, and Data Engineering), and assign the appropriate AWS IAM roles that grants only the necessary permissions to their respective tools and technology. For example, the Data Team focused on data would need access to Amazon Redshift, while the Backend team focused on web development might need access to Amazon EC2, S3 and EKS.
+2. An IAM group is created for each engineering team (Frontend Engineering, Backend Engineering, and Data Engineering), and assign the appropriate AWS IAM roles that grants only the necessary permissions to their respective tools and technology. For example, the Data Team focused on data would need access to Amazon Redshift, while the Backend team focused on web development might need access to Amazon EC2 and EKS.
 
-3. Individual users should be assignedto the appropriate IAM groups based on their team membership, this should be done with an automation tool (Terraform is being used in this implementation).
+3. Individual users should be assigned to the appropriate IAM groups based on their team membership, this should be done with an automation tool (Terraform is being used in this implementation).
 
 > Implement the principle of least privilege by granting only the minimum required permissions for each IAM role. This ensures that a compromised account cannot escalate privileges and access unauthorized resources.
 
